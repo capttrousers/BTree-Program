@@ -10,10 +10,32 @@ class BTree
 	
 	/// depth = 1, rootIndex = 0, last = 0
 	/// if adding, last++, last >= nextRowLeader - 1
-	int depth = 1, last = 0, rootIndex = 0;
+	/// int depth = 1, last = 0, rootIndex = 0;
 
+	/// constructor takes max indexed at 1, and makes tree with default nodes
+	public BTree(int max)
+	{
+		tree = new Node[max];
+		tree = makeTree(max);
+	}
+	
+	private static Node[] makeTree(int max)
+    {
+        Node[] tree = new Node[max];
+        int i = max;
+        while(i > 0)
+        {
+            tree[i - 1] = new Node(i - 1);
+            i--;
+        }
+        return tree;
+    }
 
-
+	
+	/*
+	
+	unnecessary methods
+	
 	public int getdepth(int index)
 	{
 		int d = depth;
@@ -44,7 +66,7 @@ class BTree
 		}
 	}
 	
-		
+	*/
 	
 	public int getParentIndex(Node node)
 	{
@@ -75,6 +97,10 @@ class BTree
 	}
 	
 	
+	
+	/*
+	/// when called, input the return index of getIndexByValue(nodeA.value,)
+	/// first check the return values, to see if the value exists in the tree
 	public int findCommonParent(int indexA, int indexB)
 	{
 		/// using the indexes of the 2 nodes, start at the index and go up
@@ -85,8 +111,8 @@ class BTree
 		/// return the index at array[i - 1] for the last common parent node
 		/// print out new tree, but on each str add, check to see if that node 
 		/// needs a highlight mark
-		int[] a = int[10];
-		int[] b = int[10];
+		int[] a = int[5];
+		int[] b = int[5];
 		
 		if (indexA == indexB) return indexA;
 		int x = 1;
@@ -96,12 +122,18 @@ class BTree
 	}
 	
 	
+	private int[] findPath(int index)
+	{
+		
+	}
+	*/
 	
 	
 	
 	
 	/// will return the index of the node with value
 	/// will return -1 if the value is not found
+	/// call on instance of BTree in Main()
 	public int getIndexByValue(Node[] t, string value)
 	{
 		/// find the index of the node with value
