@@ -9,7 +9,7 @@ class FindParent
 			Console.WriteLine();
 			Console.WriteLine(" ****************************************************************************");
 			Console.WriteLine(" *                                                                          *");
-			Console.WriteLine(" *   Proper use of the program is:  ~~~~ > FindParent.exe [node1] [node2]   *");
+			Console.WriteLine(" *  Open at command line like so :  ~~~~ > FindParent.exe [node1] [node2]   *");
 			Console.WriteLine(" *                                                                          *");
 			Console.WriteLine(" ****************************************************************************");
 			Console.WriteLine();
@@ -41,7 +41,7 @@ class FindParent
 		while (z < 31)
 		{
 			tree.CurrentInput = z;
-			Console.WriteLine(" *******************************************************************************");
+			Console.WriteLine("********************************************************************************");
 			Console.WriteLine();
 			writeTree(tree);
 			Console.WriteLine("********************************************************************************");
@@ -76,7 +76,7 @@ class FindParent
 		}
 		tree.NodeA_index = indexA;
 		tree.NodeB_index = indexB;
-		Console.WriteLine("*******************************************************************************");
+		Console.WriteLine("********************************************************************************");
 		Console.WriteLine();
 		writeTree(tree);
 		Console.WriteLine("********************************************************************************");
@@ -85,7 +85,7 @@ class FindParent
 		
 		tree.lowestCommonParent = tree.findCommonParent();
 		Console.Clear();
-		Console.WriteLine("*******************************************************************************");
+		Console.WriteLine("********************************************************************************");
 		Console.WriteLine();
 		writeTree(tree);
 		Console.WriteLine("********************************************************************************");		
