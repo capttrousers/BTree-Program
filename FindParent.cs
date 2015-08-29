@@ -13,6 +13,7 @@ class FindParent
 			Console.WriteLine(" *                                                                          *");
 			Console.WriteLine(" ****************************************************************************");
 			Console.WriteLine();
+			Console.ReadLine();
 			return 1;
 		} 
 		else if ( ! ( isValidString(args[0]) && isValidString(args[1]) ) )
@@ -24,6 +25,7 @@ class FindParent
 			Console.WriteLine(" *      Characters can be num6er5, or UPPPERCASE or lowercase letters      *");
 			Console.WriteLine(" ***************************************************************************");
 			Console.WriteLine();
+			Console.ReadLine();
 			return 1;
 		}
 		Console.Clear();
