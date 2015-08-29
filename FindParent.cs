@@ -1,31 +1,29 @@
 using System;
 
-class Hello
+class FindParent
 {
 	static int Main(string[] args) 
 	{
 		if(args.Length != 2)
 		{
-			Console.Clear();
 			Console.WriteLine();
-			Console.WriteLine("********************************************************************************");
-			Console.WriteLine("*                                                                              *");
-			Console.WriteLine("*         Proper use of program is:  ~~~~ > FindParent.exe [node1] [node2]     *");
-			Console.WriteLine("*                                                                              *");
-			Console.WriteLine("********************************************************************************");
+			Console.WriteLine(" ****************************************************************************");
+			Console.WriteLine(" *                                                                          *");
+			Console.WriteLine(" *   Proper use of the program is:  ~~~~ > FindParent.exe [node1] [node2]   *");
+			Console.WriteLine(" *                                                                          *");
+			Console.WriteLine(" ****************************************************************************");
 			Console.WriteLine();
 			return 1;
 		} 
 		else if ( ! ( isValidString(args[0]) && isValidString(args[1]) ) )
 		{
-			Console.Clear();
 			Console.WriteLine();
-			Console.WriteLine("********************************************************************************");
-			Console.WriteLine("*         Proper use of program is:   > FindParent.exe [node1] [node2]         *");
-			Console.WriteLine("*          Where node1 and node2 are strings of 1 or 2 characters              *");
-			Console.WriteLine("*        Characters can be numbers, or UPPPERCASE or lowercase letters         *");
-			Console.WriteLine("********************************************************************************");
-			Console.WriteLine();				
+			Console.WriteLine(" ***************************************************************************");
+			Console.WriteLine(" *   Proper use of the program is:  ~~~~ > FindParent.exe [node1] [node2]  *");
+			Console.WriteLine(" *          Where node1 and node2 are strings of 1 or 2 characters         *");
+			Console.WriteLine(" *      Characters can be num6er5, or UPPPERCASE or lowercase letters      *");
+			Console.WriteLine(" ***************************************************************************");
+			Console.WriteLine();
 			return 1;
 		}
 		Console.Clear();
@@ -41,12 +39,22 @@ class Hello
 		while (z < 31)
 		{
 			tree.CurrentInput = z;
+			Console.WriteLine(" *******************************************************************************");
+			Console.WriteLine();
 			writeTree(tree);
 			Console.WriteLine("********************************************************************************");
 			Console.WriteLine("Please enter a valid string of 2 characters for the node value:");
-			while(!(isValidString(input)))
+			int timer = 20;
+			while(( ! (isValidString(input)) ))
 			{
 				input = Console.ReadLine();
+				timer--;
+				if(timer < 0)
+				{
+					Console.Clear();
+					Console.WriteLine("STOP MESSING AROUND!");
+					return 1;
+				}
 			}
 			tree.updateNode(z, input);
 			
@@ -66,13 +74,19 @@ class Hello
 		}
 		tree.NodeA_index = indexA;
 		tree.NodeB_index = indexB;
+		Console.WriteLine("*******************************************************************************");
+		Console.WriteLine();
 		writeTree(tree);
+		Console.WriteLine("********************************************************************************");
 		Console.WriteLine("Please press enter to find the lowest common parent of the 2 highlighted nodes");
 		Console.ReadLine();
 		
 		tree.lowestCommonParent = tree.findCommonParent();
 		Console.Clear();
+		Console.WriteLine("*******************************************************************************");
+		Console.WriteLine();
 		writeTree(tree);
+		Console.WriteLine("********************************************************************************");		
 		Console.ReadLine();
 		
 		return 1;
@@ -366,12 +380,28 @@ class BTree
 		}
 	}
 	
+	
+		
+	public int calculateDepth(Node node)
+	{
+		int index = node.index;
+		int root = 0;
+		int rowLeaderIndex = root;
+		int depth = root + 1;
+		
+		while(! ( (index >= rowLeaderIndex) && (index <  ((rowLeaderIndex * 2) + 1) ) ))
+		{
+			rowLeaderIndex = (rowLeaderIndex * 2) + 1;
+			depth++;
+		}
+		return depth;
+	}
 	*/
 	
 	public int getParentIndex(int index)
 	{
 		if (index <= 0) return -1;
-		if(index - getRowLeaderIndex(index) % 2 == 0)
+		if( ( index - getRowLeaderIndex(index) ) % 2 == 0)
 		{
 			/// node is left
 			return ( index - 1 ) / 2;
@@ -442,24 +472,34 @@ class BTree
 
 		int indexA = this.nodeA;
 		int indexB = this.nodeB;
+		
 		if (indexA == indexB) return indexA;
+		
 		int[] a = new int[findPath(indexA).Length];
 		int[] b = new int[findPath(indexB).Length];
-		Console.WriteLine("before findpaths");
+		
+		// Console.WriteLine("before findpaths");
+		
 		a = findPath(indexA);
 		b = findPath(indexB);
-		Console.WriteLine("after findpaths");
-		Console.WriteLine("a path zero index is :" + a[0]);
-		Console.WriteLine("b path zero index is :" + b[0]);
+		
+		// Console.WriteLine("after findpaths");
+		// Console.WriteLine("a path zero index is :" + a[0]);
+		// Console.WriteLine("b path zero index is :" + b[0]);
+		
 		int lastCommonParentIndex = 0;
 		int k = 0;
+		
 		while((k + 1 <= a.Length) && (k + 1 <= b.Length) && (a[k] == b[k]) )
 		{
+			// Console.WriteLine("k = " + k);
+			// Console.WriteLine("nodeA has path at k of node = " + a[k]);
+			// Console.WriteLine("nodeB has path at k of node = " + b[k]);
 			lastCommonParentIndex = a[k];
 			k++;
 			
 		}
-		Console.WriteLine("after calculate last common parent");
+		// Console.WriteLine("after calculate last common parent");
 		return lastCommonParentIndex;
 	}
 	
@@ -486,26 +526,6 @@ class BTree
 			g++;
 		}
 		return finalPath;		
-	}
-
-	
-	
-	
-	
-	
-	public int calculateDepth(Node node)
-	{
-		int index = node.index;
-		int root = 0;
-		int rowLeaderIndex = root;
-		int depth = root + 1;
-		
-		while(! ( (index >= rowLeaderIndex) && (index <  ((rowLeaderIndex * 2) + 1) ) ))
-		{
-			rowLeaderIndex = (rowLeaderIndex * 2) + 1;
-			depth++;
-		}
-		return depth;
 	}
 	
 }
